@@ -47,38 +47,23 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-<<<<<<< HEAD
         <mxCell id="jDP7XRf8knhhoj4baCWg-1" value=":База данных пользователей" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="263" y="850" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="jDP7XRf8knhhoj4baCWg-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;endArrow=none;startFill=0;" edge="1" parent="1" source="jDP7XRf8knhhoj4baCWg-1" target="oMOa3SXm_goFEWfaKYYf-3">
-=======
-        <mxCell id="jDP7XRf8knhhoj4baCWg-1" value=":База данных пользователей" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="263" y="850" width="110" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="jDP7XRf8knhhoj4baCWg-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;endArrow=none;startFill=0;" parent="1" source="jDP7XRf8knhhoj4baCWg-1" target="oMOa3SXm_goFEWfaKYYf-3" edge="1">
->>>>>>> 89c8e0120a22f55452d37e5a40fb51ab2be012f1
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="30" y="693" as="sourcePoint" />
             <mxPoint x="266" y="692" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-<<<<<<< HEAD
         <mxCell id="jDP7XRf8knhhoj4baCWg-3" value="2. Проверить данные на&lt;div&gt;корректность&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=default;align=center;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;edgeStyle=none;startSize=8;endSize=8;" edge="1" parent="1">
-=======
-        <mxCell id="jDP7XRf8knhhoj4baCWg-3" value="2. Проверить данные на&lt;div&gt;корректность&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=default;align=center;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;edgeStyle=none;startSize=8;endSize=8;" parent="1" edge="1">
->>>>>>> 89c8e0120a22f55452d37e5a40fb51ab2be012f1
           <mxGeometry x="0.4" y="-80" width="80" relative="1" as="geometry">
             <mxPoint x="300" y="730" as="sourcePoint" />
             <mxPoint x="300" y="830" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-<<<<<<< HEAD
         <mxCell id="jDP7XRf8knhhoj4baCWg-4" value="3. Вернуть информацию&lt;div&gt;о пользователе&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=default;align=center;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;edgeStyle=none;startSize=8;endSize=8;" edge="1" parent="1">
-=======
-        <mxCell id="jDP7XRf8knhhoj4baCWg-4" value="3. Вернуть информацию&lt;div&gt;о пользователе&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=default;align=center;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;edgeStyle=none;startSize=8;endSize=8;" parent="1" edge="1">
->>>>>>> 89c8e0120a22f55452d37e5a40fb51ab2be012f1
           <mxGeometry x="-0.6" y="-80" width="80" relative="1" as="geometry">
             <mxPoint x="340" y="830" as="sourcePoint" />
             <mxPoint x="340" y="730" as="targetPoint" />
