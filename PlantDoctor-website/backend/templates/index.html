@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantDoctor - Система мониторинга здоровья растений</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/auth.css">
+    <link rel="stylesheet" href="/static/css/plants.css">
+    <link rel="stylesheet" href="/static/css/articles.css">
+    <link rel="stylesheet" href="/static/css/reminders.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo" onclick="showPage('home')">PlantDoctor</a>
+            <div class="nav-links">
+                <a href="#" onclick="showPage('home')">Главная</a>
+                <a href="#" onclick="showPage('dashboard')">Мои растения</a>
+                <a href="#" onclick="showPage('articles')">Статьи</a>
+                <a href="#" onclick="showPage('reminders')">Напоминания</a>
+                <a href="#" onclick="showPage('profile')" id="profile-btn" style="display: none;">Профиль</a>
+                <a href="#" id="login-btn" class="btn btn-outline">Войти</a>
+                <a href="#" id="register-btn" class="btn btn-primary">Регистрация</a>
+                <a href="#" id="logout-btn" class="btn btn-outline" style="display: none;">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главная страница -->
+    <main id="home-page">
+        <!-- Герой-блок -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Не дайте вашим растениям погибнуть!</h1>
+                <p>Умные напоминания и профессиональные советы по уходу за вашими комнатными растениями</p>
+                <a href="#" class="btn btn-primary" onclick="showPage('dashboard')">Начать</a>
+            </div>
+        </section>
+
+        <!-- Избранные статьи -->
+        <section class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Полезные статьи</h2>
+                    <a href="#" class="btn btn-outline" onclick="showPage('articles')">Все статьи</a>
+                </div>
+
+                <div class="articles-grid" id="featured-articles">
+                    <!-- Статьи будут загружены из API -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Все растения -->
+        <section class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Каталог растений</h2>
+                </div>
+
+                <div class="plants-grid" id="all-plants-grid">
+                    <!-- Растения будут загружены из API -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Личный кабинет (скрыт по умолчанию) -->
+    <main id="dashboard-page" style="display: none;">
+        <section class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Мои растения</h2>
+                </div>
+
+                <div class="plants-grid" id="my-plants-grid">
+                    <!-- Растения пользователя будут загружены из API -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Страница профиля -->
+    <main id="profile-page" style="display: none;">
+        <section class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Мой профиль</h2>
+                </div>
+
+                <div class="profile-section">
+                    <h3>Личные данные</h3>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="profile-name">Имя</label>
+                            <input type="text" id="profile-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email">Email</label>
+                            <input type="email" id="profile-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-password">Новый пароль (оставьте пустым, если не хотите менять)</label>
+                            <input type="password" id="profile-password">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Страница статей -->
+    <main id="articles-page" style="display: none;">
+        <section class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Полезные статьи</h2>
+                </div>
+
+                <div class="articles-grid" id="articles-container">
+                    <!-- Статьи будут загружены из API -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="reminders-page" style="display: none;">
+        <section class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Мои напоминания</h2>
+                    <button class="btn btn-primary" onclick="showModal('add-reminder-modal')">
+                        Добавить напоминание
+                    </button>
+                </div>
+
+                <div class="reminders-grid" id="reminders-container">
+                    <!-- Напоминания будут загружены из API -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="add-reminder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('add-reminder-modal')">&times;</span>
+            <h3>Добавить напоминание</h3>
+            <form id="add-reminder-form">
+                <div class="form-group">
+                    <label for="reminder-type">Тип напоминания</label>
+                    <select id="reminder-type" required>
+                        <option value="watering">Полив</option>
+                        <option value="fertilizing">Удобрение</option>
+                        <option value="pruning">Обрезка</option>
+                        <option value="repotting">Пересадка</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reminder-plant">Растение (необязательно)</label>
+                    <select id="reminder-plant">
+                        <option value="">Выберите растение</option>
+                        <!-- Растения будут загружены из API -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reminder-date">Дата и время</label>
+                    <input type="datetime-local" id="reminder-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reminder-notes">Заметки (необязательно)</label>
+                    <textarea id="reminder-notes" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline"
+                        onclick="hideModal('add-reminder-modal')">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-reminder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('edit-reminder-modal')">&times;</span>
+            <h3>Редактировать напоминание</h3>
+            <form id="edit-reminder-form" onsubmit="reminders.handleUpdateReminder(event)">
+                <input type="hidden" id="edit-reminder-id">
+
+                <div class="form-group">
+                    <label for="edit-reminder-type">Тип напоминания</label>
+                    <select id="edit-reminder-type" required>
+                        <option value="watering">Полив</option>
+                        <option value="fertilizing">Удобрение</option>
+                        <option value="pruning">Обрезка</option>
+                        <option value="repotting">Пересадка</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-reminder-date">Дата и время</label>
+                    <input type="datetime-local" id="edit-reminder-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-reminder-notes">Заметки</label>
+                    <textarea id="edit-reminder-notes" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline"
+                        onclick="hideModal('edit-reminder-modal')">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно входа -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('login-modal')">&times;</span>
+            <h2>Вход в систему</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="hideModal('login-modal')">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </div>
+                <div class="form-footer">
+                    Нет аккаунта? <a onclick="showRegisterModal()">Зарегистрируйтесь</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно отметки полива -->
+    <div id="watering-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('watering-modal')">&times;</span>
+            <h3>Отметить полив</h3>
+            <form id="watering-form">
+                <div class="form-group">
+                    <label for="watering-date">Дата последнего полива</label>
+                    <input type="date" id="watering-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="watering-interval">Интервал полива (дней)</label>
+                    <input type="number" id="watering-interval" min="1" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="hideModal('watering-modal')">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('register-modal')">&times;</span>
+            <h2>Регистрация</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-name">Имя</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Подтвердите пароль</label>
+                    <input type="password" id="register-confirm" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="hideModal('register-modal')">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                </div>
+                <div class="form-footer">
+                    Уже есть аккаунт? <a onclick="showLoginModal()">Войдите</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для просмотра статьи -->
+    <div id="article-details-modal" class="modal">
+        <div class="modal-content article-modal">
+            <span class="close-modal" onclick="hideModal('article-details-modal')">&times;</span>
+
+            <div class="article-modal-header">
+                <div class="article-image-container">
+                    <div class="article-image" id="article-detail-image"></div>
+                    <div class="article-badge" id="article-detail-plant"></div>
+                </div>
+
+                <div class="article-title-container">
+                    <h1 id="article-detail-title"></h1>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Автор:</span>
+                            <span id="article-detail-author" class="meta-value"></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Опубликовано:</span>
+                            <span id="article-detail-date" class="meta-value"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="article-detail-content" class="article-modal-body"></div>
+
+            <div class="article-modal-footer">
+                <button class="btn btn-close" onclick="hideModal('article-details-modal')">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с деталями растения -->
+    <div id="plant-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('plant-details-modal')">&times;</span>
+
+            <div class="plant-main-info">
+                <div class="plant-image" id="detail-plant-image"></div>
+                <div class="plant-header">
+                    <h2 id="detail-plant-name">Орхидея Фаленопсис</h2>
+                    <p id="detail-plant-type">Тип: Орхидея</p>
+                </div>
+            </div>
+
+            <div class="plant-care-info">
+                <div class="care-section">
+                    <h3>Инструкция по уходу</h3>
+                    <div id="detail-plant-care" class="care-text">
+                        Орхидеи требуют умеренного полива каждые 10 дней. Избегайте попадания воды на листья.
+                        Оптимальная температура 18-25°C. Требуется яркий рассеянный свет.
+                    </div>
+                </div>
+            </div>
+
+            <div class="plant-footer-info">
+                <div class="footer-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Последний полив:</span>
+                        <span class="meta-value" id="detail-last-watered">не указан</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Интервал полива:</span>
+                        <span class="meta-value" id="detail-water-interval">7 дней</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Температура:</span>
+                        <span class="meta-value" id="detail-temperature">18-25°C</span>
+                    </div>
+                </div>
+
+                <div class="footer-actions">
+                    <button class="btn btn-outline" onclick="hideModal('plant-details-modal')">Закрыть</button>
+                    <button class="btn btn-primary" onclick="plants.showWateringModalFromDetails()">Отметить
+                        полив</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно отметки полива -->
+    <div id="watering-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('watering-modal')">&times;</span>
+            <h3>Отметить полив</h3>
+            <form id="watering-form">
+                <div class="form-group">
+                    <label for="watering-date">Дата последнего полива</label>
+                    <input type="date" id="watering-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="watering-interval">Интервал полива (дней)</label>
+                    <input type="number" id="watering-interval" min="1" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="hideModal('watering-modal')">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-plant-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideModal('delete-plant-modal')">&times;</span>
+            <h3>Подтверждение удаления</h3>
+            <p>Вы уверены, что хотите удалить это растение из своей коллекции?</p>
+            <div class="form-actions">
+                <button class="btn btn-outline" onclick="hideModal('delete-plant-modal')">Отмена</button>
+                <button class="btn btn-danger" id="confirm-delete-plant">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение JavaScript -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/plants.js"></script>
+    <script src="/static/js/articles.js"></script>
+    <script src="/static/js/reminders.js"></script>
+
+</body>
+
+</html>

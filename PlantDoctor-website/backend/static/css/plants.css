@@ -1,0 +1,173 @@
+/* plants.css - Стили для разделов с растениями */
+.plants-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.plant-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.plant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.plant-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.plant-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.plant-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.plant-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #2e7d32;
+}
+
+.plant-meta {
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+.plant-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+.plant-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.watering-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #2196F3;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Стили для модального окна с деталями растения */
+.plant-details-modal {
+    max-width: 800px;
+}
+
+.plant-details-content {
+    display: flex;
+    gap: 30px;
+}
+
+.plant-details-image {
+    flex: 0 0 300px;
+    height: 300px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.plant-details-text {
+    flex: 1;
+}
+
+.care-instructions {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .plant-details-content {
+        flex-direction: column;
+    }
+    
+    .plant-details-image {
+        flex: 0 0 200px;
+        width: 100%;
+    }
+}
+
+
+/* Добавьте в ваш CSS файл */
+.requirement-item {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.requirement-label {
+    font-weight: bold;
+    min-width: 150px;
+    display: inline-block;
+}
+
+.requirement-value {
+    flex: 1;
+}
+
+.care-requirements {
+    margin-top: 15px;
+}
+
+#detail-health-status-container {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Добавьте в ваш CSS файл */
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+  border: 1px solid #d32f2f;
+}
+
+.btn-danger:hover {
+  background-color: #d32f2f;
+}
+
+/* Стили для модального окна удаления */
+#delete-plant-modal .modal-content {
+  max-width: 400px;
+}
+
+#delete-plant-modal p {
+  margin-bottom: 20px;
+}
